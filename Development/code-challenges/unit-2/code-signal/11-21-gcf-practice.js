@@ -73,7 +73,7 @@ const solution2 = (numbers) => {
 PEDAC
 PROBLEM:
 - INPUT: an array of digits, and an array of letters in a string
-- OUTPUT: and array of Boolean for each digits
+- OUTPUT: an array of Boolean for each messages
 
 EDGE CASES:
 - Example 1:
@@ -111,7 +111,7 @@ const solution3 = (digits, words) => {
     // Turning digits into index
     const phone = ['', '', 'abc', 'def', 'ghi', 'jkl', 'mno', 'pqrs', 'tuv', 'wxyz'];
     // Array of groups of letters that the digits can do based on the `digits` provided
-    const phoneNum = digits.map((num) => phone[num]).join('');
+    const working = digits.map((num) => phone[num]).join('');
     // Create an empty array
     const arr = [];
     // Iterate through `words` array
@@ -119,7 +119,7 @@ const solution3 = (digits, words) => {
         // Split each message 
         const split = msg.split('');
         // Filter the `split` array if the letter is NOT included in `phoneNum`
-        const filter = split.filter(letter => !phoneNum.includes(letter));
+        const filter = split.filter(letter => !working.includes(letter));
         // If the length of the filtered letter is more than 0, add `false` into the empty array or `true` if there are 0 filtered letter
         filter.length > 0 ? arr.push(false) : arr.push(true);
     })
