@@ -85,3 +85,99 @@ At the end, the only toy left in your hand is 4. Since there wasn’t another 4 
 const solution = (nums) => {
     return nums.reduce((acc, num) => acc ^ num, 0);
 };
+
+// Mario's Code:
+function solution(nums) {
+    const freakyMap = nums.reduce((acc, num) => {
+      acc[num] = (acc[num] || 0) + 1;
+      return acc;
+    }, {});
+  
+    const noRep = nums.filter(num => freakyMap[num] === 1);
+    return noRep[0];
+}
+
+// King's Code:
+/*
+## PEDAC
+**Problem**
+input: array of integers
+output: integer
+
+What is the task? How would you rephrase the problem in your own words? 
+The task is to find the element within the array that only appears once and return it.
+
+**Examples/Edge Case:** 
+input: nums = [3, 4, 5, 3, 5]
+output: 4
+
+**Data Structure/Data Type**
+array, integers, 
+ 
+**Algorithm** 
+How will you convert the input to output? 
+Try out your algorithm with one of your examples/edge cases. Does it convert the input into the correct output? 
+*/
+// Code your solution!
+
+const solution = (nums) => {
+    // create an empty object to store key value pairs of the array (nums)
+    const freq = {};
+    
+    // iterates through the nums array and adds the current element as a key
+    for (const num of nums) { 
+        // if the key already has 1 as its value, add 1 to the exisiting value
+        if (freq[num] === 1) {
+            freq[num] += 1;
+        } else {
+            // else, add 1 as a value to that key (num)
+            freq[num] = 1;
+        }
+    };
+    
+    // iterates through the freq object and searches for the key with the value of 1
+    for (const key in freq) {
+        if (freq[key] === 1) {
+            // returns it as a number since the key would be a string (Number constructor)
+            return Number(key);
+        }
+    };
+};
+
+// Catalina's Code:
+/**
+ * Finds the number with no duplicates in an array
+ * @param nums {array of numbers} array of numbers with one value that appears only once
+ * @returns {number} the number in the array that appears only once
+*/
+const solution = (nums) => {
+    // creates an object to represent the frequency of numbers in the array
+    let freq = nums.reduce((obj, c) => {
+      // creates key in `obj` with a value of 1 if not already added
+      if (!obj[c]) obj[c] = 1;
+      // increments value of key `c` in `obj`
+      else obj[c]++;
+      return obj;
+    }, {});
+    // loops through keys of frequency object to find number with no duplicates
+    for (f of Object.keys(freq)) {
+      // returns value of the array that appears once, converting to a number
+      if (freq[f] === 1) return Number(f);
+    }
+    return null;
+  }
+
+// Luis's Code:
+const solution = (nums) => {
+    const obj = {};
+    
+    for (let i = 0; i < nums.length; i += 1) {
+    !obj[nums[i]] ? obj[nums[i]] = 1 : obj[nums[i]] += 1
+    }
+    
+    for (const num in obj) {
+        if (obj[num] === 1) {
+            return +num
+        }
+    }
+}
